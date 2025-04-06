@@ -1,0 +1,421 @@
+﻿namespace = cvlm_misc
+
+# cvlm_misc.1 - set strategy - menu
+# cvlm_misc.2 - set strategy - adm
+# cvlm_misc.3 - set strategy - dip - disabled
+# cvlm_misc.4 - set strategy - pol
+
+# cvlm_misc.200 - customize - menu
+# cvlm_misc.210 - customize - name
+# cvlm_misc.220 - customize - flag
+# cvlm_misc.221 - customize - flag - template
+# cvlm_misc.222 - customize - flag - coa
+# cvlm_misc.230 - customize - flavor
+
+
+# set strategy - menu
+cvlm_misc.1 = { 
+	type = country_event
+	dlc = dlc_civilization_mission
+	placement = scope:target_country
+	duration = 1
+
+	title = cvlm_misc.1.t
+	desc = cvlm_misc.1.d
+	flavor = cvlm_misc.1.f
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+    event_image = {
+		video = "africa_construction_colony"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	# adm
+	option = {
+		name = cvlm_misc.1.1
+		hidden_effect = { trigger_event = { id = cvlm_misc.2 popup = yes } }
+	}
+
+	# dip - disabled
+	#option = {
+		#name = cvlm_misc.1.2
+		#hidden_effect = { trigger_event = { id = cvlm_misc.3 popup = yes } }
+	#}
+
+	# pol
+	option = {
+		name = cvlm_misc.1.3
+		hidden_effect = { trigger_event = { id = cvlm_misc.4 popup = yes } }
+	}
+
+	option = {
+		name = cvlm_misc.1.4
+		default_option = yes
+	}
+}
+
+# set strategy - adm
+cvlm_misc.2 = { 
+	type = country_event
+	dlc = dlc_civilization_mission
+	placement = scope:target_country
+	duration = 1
+
+	title = cvlm_misc.1.t
+	desc = cvlm_misc.1.d
+	flavor = cvlm_misc.1.f
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+    event_image = {
+		video = "africa_construction_colony"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	option = {
+		name = ai_strategy_colonial_extraction
+		scope:target_country = { set_strategy = ai_strategy_colonial_extraction }
+		hidden_effect = { trigger_event = { id = cvlm_misc.1 popup = yes } }
+	}
+
+	option = {
+		name = ai_strategy_plantation_economy
+		scope:target_country = { set_strategy = ai_strategy_plantation_economy }
+		hidden_effect = { trigger_event = { id = cvlm_misc.1 popup = yes } }
+	}
+
+	option = {
+		name = ai_strategy_agricultural_expansion
+		scope:target_country = { set_strategy = ai_strategy_agricultural_expansion }
+		hidden_effect = { trigger_event = { id = cvlm_misc.1 popup = yes } }
+	}
+
+	option = {
+		name = ai_strategy_placate_population
+		scope:target_country = { set_strategy = ai_strategy_placate_population }
+		hidden_effect = { trigger_event = { id = cvlm_misc.1 popup = yes } }
+	}
+
+	option = {
+		name = ai_strategy_industrial_expansion
+		scope:target_country = { set_strategy = ai_strategy_industrial_expansion }
+		hidden_effect = { trigger_event = { id = cvlm_misc.1 popup = yes } }
+        highlighted_option = yes
+		show_as_unavailable = { always = yes }
+        trigger = {
+			country_rank >= rank_value:major_power
+			has_technology_researched = civilizing_mission
+			scope:target_country = { 	
+				# ruler
+				custom_tooltip = {
+					text = cvlm_misc.1.6
+					ruler = {
+						NOR = {
+							has_ideology = ideology:ideology_traditionalist
+							has_ideology = ideology:ideology_luddite
+						}
+					}
+				}
+				# ig
+				ig:ig_industrialists = {
+					OR = {
+						is_in_government = yes
+						is_powerful = yes
+					} 
+				}
+				# law
+				NOR = {
+					has_law = law_type:law_traditionalism
+					has_law = law_type:law_agrarianism
+					has_law = law_type:law_industry_banned
+				}
+			}
+		}
+	}
+
+	option = {
+		name = cvlm_misc.1.5
+		hidden_effect = { trigger_event = { id = cvlm_misc.1 popup = yes } }
+		default_option = yes
+	}
+}
+
+# set strategy - dip - disabled
+# cvlm_misc.3 = { 
+# 	type = country_event
+# 	dlc = dlc_civilization_mission
+# 	placement = scope:target_country
+# 	duration = 1
+
+# 	title = cvlm_misc.1.t
+# 	desc = cvlm_misc.1.d
+# 	flavor = cvlm_misc.1.f
+
+# 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#     event_image = {
+# 		video = "africa_construction_colony"
+# 	}
+
+# 	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+# 	option = {
+# 		name = ai_strategy_maintain_power_balance
+# 		scope:target_country = { set_strategy = ai_strategy_maintain_power_balance }
+# 		hidden_effect = { trigger_event = { id = cvlm_misc.1 popup = yes } }
+# 	}
+
+# 	option = {
+# 		name = ai_strategy_territorial_expansion
+# 		scope:target_country = { set_strategy = ai_strategy_territorial_expansion }
+# 		hidden_effect = { trigger_event = { id = cvlm_misc.1 popup = yes } }
+# 	}
+
+# 	option = {
+# 		name = ai_strategy_armed_isolationism
+# 		scope:target_country = { set_strategy = ai_strategy_armed_isolationism }
+# 		hidden_effect = { trigger_event = { id = cvlm_misc.1 popup = yes } }
+# 	}
+
+# 	option = {
+# 		name = cvlm_misc.1.5
+# 		hidden_effect = { trigger_event = { id = cvlm_misc.1 popup = yes } }
+# 		default_option = yes
+# 	}
+# }
+
+# set strategy - pol
+cvlm_misc.4 = { 
+	type = country_event
+	dlc = dlc_civilization_mission
+	placement = scope:target_country
+	duration = 1
+
+	title = cvlm_misc.1.t
+	desc = cvlm_misc.1.d
+	flavor = cvlm_misc.1.f
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+    event_image = {
+		video = "africa_construction_colony"
+	}
+
+	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+	option = {
+		name = ai_strategy_conservative_agenda
+		scope:target_country = { set_strategy = ai_strategy_conservative_agenda }
+		hidden_effect = { trigger_event = { id = cvlm_misc.1 popup = yes } }
+        highlighted_option = yes
+		show_as_unavailable = { always = yes }
+        trigger = {
+			scope:target_country = { 
+				custom_tooltip = {
+					text = cvlm_misc.1.6
+					ruler = {
+						NOT = { has_ideology = ideology:ideology_radical }
+						has_socialist_ideology = no
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = ai_strategy_reactionary_agenda
+		scope:target_country = { set_strategy = ai_strategy_reactionary_agenda }
+		hidden_effect = { trigger_event = { id = cvlm_misc.1 popup = yes } }
+        highlighted_option = yes
+		show_as_unavailable = { always = yes }
+        trigger = {
+			scope:target_country = { 
+				custom_tooltip = {
+					text = cvlm_misc.1.6
+					ruler = {
+						OR = {
+							has_conservative_ideology = yes
+							has_reactionary_ideology = yes
+							has_monarchist_ideology = yes
+						}
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = ai_strategy_progressive_agenda
+		scope:target_country = { set_strategy = ai_strategy_progressive_agenda }
+		hidden_effect = { trigger_event = { id = cvlm_misc.1 popup = yes } }
+        highlighted_option = yes
+		show_as_unavailable = { always = yes }
+        trigger = {
+			scope:target_country = { 
+				custom_tooltip = {
+					text = cvlm_misc.1.6
+					ruler = {
+						NOR = {
+							has_conservative_ideology = yes
+							has_reactionary_ideology = yes
+							has_monarchist_ideology = yes
+						}
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = ai_strategy_egalitarian_agenda
+		scope:target_country = { set_strategy = ai_strategy_egalitarian_agenda }
+		hidden_effect = { trigger_event = { id = cvlm_misc.1 popup = yes } }
+        highlighted_option = yes
+		show_as_unavailable = { always = yes }
+        trigger = {
+			# law
+			has_technology_researched = egalitarianism 
+			scope:target_country = { has_technology_researched = egalitarianism }
+			# ruler
+			scope:target_country = { 
+				custom_tooltip = {
+					text = cvlm_misc.1.6
+					ruler = {
+						OR = {
+							has_liberal_ideology = yes
+							has_progressive_ideology = yes
+							has_socialist_ideology = yes
+						}
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = ai_strategy_nationalist_agenda
+		scope:target_country = { set_strategy = ai_strategy_nationalist_agenda }
+		hidden_effect = { trigger_event = { id = cvlm_misc.1 popup = yes } }
+        highlighted_option = yes
+		show_as_unavailable = { always = yes }
+        trigger = {
+			# law
+			has_technology_researched = nationalism
+			scope:target_country = { has_technology_researched = nationalism }
+			# ruler
+			scope:target_country = { 
+				custom_tooltip = {
+					text = cvlm_misc.1.6
+					ruler = {
+						OR = {
+							has_conservative_ideology = yes
+							has_reactionary_ideology = yes
+							has_monarchist_ideology = yes
+						}
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = cvlm_misc.1.5
+		hidden_effect = { trigger_event = { id = cvlm_misc.1 popup = yes } }
+		default_option = yes
+	}
+}
+
+
+# customize - menu
+# cvlm_misc.200 = { 
+# 	type = country_event
+# 	dlc = dlc_civilization_mission
+# 	placement = scope:target_country
+# 	duration = 1
+
+# 	title = cvlm_misc.200.t
+# 	desc = cvlm_misc.200.d
+# 	flavor = cvlm_misc.200.f
+
+# 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#     event_image = {
+# 		video = "africa_construction_colony"
+# 	}
+
+# 	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+# 	# name
+# 	option = {
+# 		name = cvlm_misc.200.1
+# 		hidden_effect = { trigger_event = { id = cvlm_misc.210 popup = yes } }
+# 	}
+
+# 	# flag
+# 	option = {
+# 		name = cvlm_misc.200.2
+# 		#hidden_effect = { trigger_event = { id = cvlm_misc.220 popup = yes } }
+# 	}
+
+# 	# flavor
+# 	option = {
+# 		name = cvlm_misc.200.3
+# 		#hidden_effect = { trigger_event = { id = cvlm_misc.230 popup = yes } }
+# 	}
+
+# 	option = {
+# 		name = cvlm_misc.200.4
+# 		default_option = yes
+# 	}
+# }
+
+# customize - name
+# cvlm_misc.210 = { 
+# 	type = country_event
+# 	dlc = dlc_civilization_mission
+# 	placement = scope:target_country
+# 	duration = 1
+
+# 	title = cvlm_misc.210.t
+# 	desc = cvlm_misc.210.d
+# 	flavor = cvlm_misc.210.f
+
+# 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+#     event_image = {
+# 		video = "africa_construction_colony"
+# 	}
+
+# 	icon = "gfx/interface/icons/event_icons/event_portrait.dds"
+
+# 	# city hub
+# 	option = {
+# 		name = cvlm_misc.210.1
+# 		scope:target_country = { 
+# 			cvlm_customize_name_cleaner_effect = yes
+# 			capital = { save_scope_as = capital_state_scope }
+# 			set_variable = cvlm_customize_name_city 
+# 		}
+# 	}
+
+# 	# state
+# 	option = {
+# 		name = cvlm_misc.210.2
+# 		scope:target_country = { 
+# 			cvlm_customize_name_cleaner_effect = yes
+# 			set_variable = cvlm_customize_name_state 
+# 		}
+# 	}
+
+# 	# strategic region
+# 	option = {
+# 		name = cvlm_misc.210.3
+# 		scope:target_country = { 
+# 			cvlm_customize_name_cleaner_effect = yes
+# 			set_variable = cvlm_customize_name_region 
+# 		}
+# 	}
+
+# 	option = {
+# 		name = cvlm_misc.200.5
+# 		hidden_effect = { trigger_event = { id = cvlm_misc.200 popup = yes } }
+# 		default_option = yes
+# 	}
+# }

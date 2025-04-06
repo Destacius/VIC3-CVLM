@@ -1,0 +1,3 @@
+if = {
+	limit = { has_global_variable = mod_cvlm_is_on }
+}

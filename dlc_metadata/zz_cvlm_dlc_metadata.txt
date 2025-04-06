@@ -1,0 +1,7 @@
+﻿dlc_civilization_mission = {
+	name = "Civilization Mission"
+	steam_id = "529340"
+	type = minor
+	priority = 0
+	theme_provider = no
+}

@@ -1,0 +1,42 @@
+﻿# cvlm_establish_degree = {
+# 	texture = "gfx/interface/icons/decree/decree_violent_suppression.dds"		
+	
+# 	unlocking_technologies = {
+# 		civilizing_mission
+# 	}
+	
+# 	valid = {
+# 		owner = { 
+# 			is_subject = no
+# 			# can only mark one at a time
+# 			NOT = {
+# 				any_scope_state = {
+# 					has_decree = cvlm_establish_degree
+# 				}
+# 			}
+# 		}
+# 		is_incorporated = no
+# 		is_split_state = no
+# 		NOT = { is_homeland_of_country_cultures = owner }
+# 		NOT = { region = owner.capital.region }
+# 		# one per stategic region
+# 		NOT = {
+# 			any_subject_or_below = {
+# 				capital.region = prev.capital.region
+# 				OR = { 
+# 					has_variable = cvlm_colonial_government_var
+# 					is_african_subject = yes
+# 				}
+# 			}
+# 		}
+# 	}
+# 	modifier = {
+# 		custom_tooltip = cvlm_cvlm_establish_desc
+# 	}
+
+# 	cost = 0
+	
+# 	ai_weight = {
+# 		value = 0
+# 	}
+# }

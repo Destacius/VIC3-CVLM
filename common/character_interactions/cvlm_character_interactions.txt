@@ -1,0 +1,87 @@
+﻿colonial_government_appoint_governor = {
+	clicksound = "event:/SFX/UI/Military/command_grant"
+
+	potential = {
+        is_ruler = no
+		is_heir = no
+		NOT = { has_modifier = cvlm_modifier_character_governor_candidate }
+	    # available during the event chain
+	    owner ?= scope:actor
+        owner ?= {
+            OR = {
+                has_modifier = cvlm_modifier_country_establish_suzerain
+                has_modifier = cvlm_modifier_country_reorganize_suzerain
+            }
+            exists = var:cvlm_establish_option_governor_var
+            trigger_if = {
+                limit = { exists = var:cvlm_establish_option_governor_var }
+                var:cvlm_establish_option_governor_var = 1
+            }
+	    }
+	}
+
+	show_requirements = yes
+
+	possible = {
+	    is_ruler = no
+	    NOT = { has_role = agitator }
+        # devout must follow same religion
+        trigger_if = {
+            limit = {
+                interest_group = { is_interest_group_type = ig_devout }
+                owner ?= { exists = var:cvlm_establish_option_religion_var }
+            }
+            custom_tooltip = {
+                text = colonial_government_appoint_governor_devout
+                owner ?= {
+                    OR = {
+                        var:cvlm_establish_option_religion_var = 0
+                        var:cvlm_establish_option_religion_var = 1
+                        var:cvlm_establish_option_religion_var = 2
+                    }
+                }
+            }
+        }
+        # sorry, not from the lower class
+        interest_group = {
+            NOR = {
+                is_interest_group_type = ig_trade_unions
+                is_interest_group_type = ig_rural_folk
+            }
+        }
+	    OR = {
+            # politician
+            AND = {
+                has_role = politician
+                interest_group = { is_in_government = yes }
+            }
+            # army
+            AND = {
+                OR = {
+                    has_role = general
+                    has_role = admiral
+                }
+                commander_rank >= 3
+            }
+        }
+	}
+
+	effect = {
+	    custom_tooltip = {
+	        text = colonial_government_appoint_governor_tooltip
+            owner ?= {
+                every_character = {
+                    limit = { has_modifier = cvlm_modifier_character_governor_candidate }
+                    remove_modifier = cvlm_modifier_character_governor_candidate
+                }
+            }
+            add_modifier = {
+                name = cvlm_modifier_character_governor_candidate
+            }
+	    }
+    }
+
+	ai_chance = {
+		value = 0
+	}
+}
